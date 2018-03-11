@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Nginx 配置介绍 简介 Nginx是一个HTTP和反向代理服务器，一个邮件代理服务器，一个通用TCP代理服务器。第一个公开版本发行于2004年，俄国人发布，截止到2015年4月，市场占有率为21.43%，已成为排名第二的服务器(Apache排名第一)，成为了高性能服务器的代名词。 Nginx是在互联网产业规模发展起来后，针对高并发设计的服务器，具有高性能，高扩展性，高并发性(单机支持10万以上并发连接)，高可靠性，低内存消耗(10000个非活动keep-alive连接仅消耗2.5M内存)，热部署，及最自由的开源许可协议(所以第三方功能模块非常丰富)等特性。
+官网访问
+基本命令 安装 Windows下直接下载解压，linux下可以通过yum等安装工具安装。
+命令  启动
+直接执行ngix可执行文件。在linux下可以通过ps -aux|grep nginx查询nginx进程，windows可以通过任务管理器查看。 维护
+nginx启动后，大部分的维护都可以通过nginx -s singal维护，参数有：  stop: 快速关闭 quit: 平滑关闭 reload: 修改配置文件后，重新加载配置文件生效。 当修改配置文件后，可以用nginx -t检查配置文件是否符合规范。   配置文件介绍 Nginx设计由许多功能模块构成，这些功能模块都由配置文件控制。配置文件位于%nginx_home%\conf\nginx.conf，是一个普通的文本文件。配置文件由配置项和块配置项构成，注释以#开头。
+ 配置项值
+配置项名 配置项值 配置项值...;
+配置项由配置值项名，配置项值构成，配置项名与值，配置项值与配置项值由空格分隔，最后以分号结束。配置项名必须是Nginx某个模块的配置，否则Nginx会认为非法配置。 块配置项
+块配置项与配置项类似，只是最后&rdquo;{}&ldquo;结束，括号中可以包含其它配置项，形成配置上下文，表示配置项同时生效。块配置项可以嵌套，同名配置项优先级，依赖于对应的Nginx模块。  基本配置  worker_processes
+worker_processes 2;
+Nginx使用一个Master进程来管理多个worker进程，一般情况下进程的数量与服务器CPU核数相等。用master进程管理，用worker进程处理连接请求，与Apache进程不同，Nginx一个进程可以同时处理多个连接请求，保证了高并发与稳健性。 error_log/access_log
+error_log logs/error.log error;
+access_log logs/host.access.log main;
+用于配置错误日志和访问日志，默认日志输出到logs目录中，错误日志输出级别有：debug,info,notice,warn,error,alert,emerg，从小到大。 pid
+pid logs/nginx.pid;
+保存master进程id的文件存放位置，默认位于logs目录中。 user
+user nobody; 设置worker进程运行的用户及用户组。 user
+use epoll;
+设置事件模型，nginx自动选择，依赖于操作系统。windows不支持epoll，所以nginx在windows平台上大并发连接处理能力比较弱。
+  Web服务器配置 Web服务器主要功能由ngx_http_core_module实现。一个典型的Web服务器由http配置块定义，包含多个server配置块、location配置块、upstream配置块，所有的Web服务器配置必须位于这些块中。 &gt;http { upstream backend{ &hellip; } server { listen 80; server_name localhost; location /xxx{ &hellip; } location /xxx{ &hellip;.'>
+
+<meta property='og:title' content='Nginx 配置介绍 • 茅草屋'>
+<meta property='og:description' content='Nginx 配置介绍 简介 Nginx是一个HTTP和反向代理服务器，一个邮件代理服务器，一个通用TCP代理服务器。第一个公开版本发行于2004年，俄国人发布，截止到2015年4月，市场占有率为21.43%，已成为排名第二的服务器(Apache排名第一)，成为了高性能服务器的代名词。 Nginx是在互联网产业规模发展起来后，针对高并发设计的服务器，具有高性能，高扩展性，高并发性(单机支持10万以上并发连接)，高可靠性，低内存消耗(10000个非活动keep-alive连接仅消耗2.5M内存)，热部署，及最自由的开源许可协议(所以第三方功能模块非常丰富)等特性。
+官网访问
+基本命令 安装 Windows下直接下载解压，linux下可以通过yum等安装工具安装。
+命令  启动
+直接执行ngix可执行文件。在linux下可以通过ps -aux|grep nginx查询nginx进程，windows可以通过任务管理器查看。 维护
+nginx启动后，大部分的维护都可以通过nginx -s singal维护，参数有：  stop: 快速关闭 quit: 平滑关闭 reload: 修改配置文件后，重新加载配置文件生效。 当修改配置文件后，可以用nginx -t检查配置文件是否符合规范。   配置文件介绍 Nginx设计由许多功能模块构成，这些功能模块都由配置文件控制。配置文件位于%nginx_home%\conf\nginx.conf，是一个普通的文本文件。配置文件由配置项和块配置项构成，注释以#开头。
+ 配置项值
+配置项名 配置项值 配置项值...;
+配置项由配置值项名，配置项值构成，配置项名与值，配置项值与配置项值由空格分隔，最后以分号结束。配置项名必须是Nginx某个模块的配置，否则Nginx会认为非法配置。 块配置项
+块配置项与配置项类似，只是最后&rdquo;{}&ldquo;结束，括号中可以包含其它配置项，形成配置上下文，表示配置项同时生效。块配置项可以嵌套，同名配置项优先级，依赖于对应的Nginx模块。  基本配置  worker_processes
+worker_processes 2;
+Nginx使用一个Master进程来管理多个worker进程，一般情况下进程的数量与服务器CPU核数相等。用master进程管理，用worker进程处理连接请求，与Apache进程不同，Nginx一个进程可以同时处理多个连接请求，保证了高并发与稳健性。 error_log/access_log
+error_log logs/error.log error;
+access_log logs/host.access.log main;
+用于配置错误日志和访问日志，默认日志输出到logs目录中，错误日志输出级别有：debug,info,notice,warn,error,alert,emerg，从小到大。 pid
+pid logs/nginx.pid;
+保存master进程id的文件存放位置，默认位于logs目录中。 user
+user nobody; 设置worker进程运行的用户及用户组。 user
+use epoll;
+设置事件模型，nginx自动选择，依赖于操作系统。windows不支持epoll，所以nginx在windows平台上大并发连接处理能力比较弱。
+  Web服务器配置 Web服务器主要功能由ngx_http_core_module实现。一个典型的Web服务器由http配置块定义，包含多个server配置块、location配置块、upstream配置块，所有的Web服务器配置必须位于这些块中。 &gt;http { upstream backend{ &hellip; } server { listen 80; server_name localhost; location /xxx{ &hellip; } location /xxx{ &hellip;.'>
+<meta property='og:url' content='http://example.org/%E6%96%87%E7%AB%A0/2015/nginx-%E9%85%8D%E7%BD%AE%E4%BB%8B%E7%BB%8D/'>
+<meta property='og:site_name' content='茅草屋'>
+<meta property='og:type' content='article'><meta property='article:section' content='文章'><meta property='article:tag' content='中间件'><meta property='article:published_time' content='2015-05-05T00:00:00Z'/><meta property='article:modified_time' content='2015-05-05T00:00:00Z'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.37.1" />
+
+  <title>Nginx 配置介绍 • 茅草屋</title>
+  <link rel='canonical' href='http://example.org/%E6%96%87%E7%AB%A0/2015/nginx-%E9%85%8D%E7%BD%AE%E4%BB%8B%E7%BB%8D/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.8d5211f9.css'>
+</head>
+
+
+<body class='page type-文章 has-sidebar sidebar-sticky'>
+
+  <div class='site'>
+
+    <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+<div id='sidebar' class='sidebar'>
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+    茅草屋
+    </h2>
+    <div class='desc'>
+    0x2B|~0x2B
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'>Tags</h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6' style='font-size:1em'>中间件</a>
+      </li></ul>
+</div>
+
+
+</section>
+</div>
+</div>
+
+    <div class='main'>
+
+      <nav id='main-menu' class='main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='hamburger hamburger--arrow sidebar-toggler' type='button' aria-controls='sidebar' aria-expanded='false'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+    <ul><li class='item'>
+        <a href='/'>首页</a>
+      </li><li class='item'>
+        <a href='/%E6%96%87%E7%AB%A0/'>文章</a>
+      </li></ul>
+  </div>
+</nav>
+
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>茅草屋</p><p class='desc site-desc'>0x2B|~0x2B</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Nginx 配置介绍</h1>
+      
+
+    </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2015-05-05T00:00:00Z'>2015, May 05</time>
+</span>
+
+  
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<h1 id="nginx-配置介绍">Nginx 配置介绍</h1>
+
+<h2 id="简介">简介</h2>
+
+<p>Nginx是一个HTTP和反向代理服务器，一个邮件代理服务器，一个通用TCP代理服务器。第一个公开版本发行于2004年，俄国人发布，截止到2015年4月，市场占有率为21.43%，已成为排名第二的服务器(Apache排名第一)，成为了高性能服务器的代名词。
+Nginx是在互联网产业规模发展起来后，针对高并发设计的服务器，具有高性能，高扩展性，高并发性(单机支持10万以上并发连接)，高可靠性，低内存消耗(10000个非活动keep-alive连接仅消耗2.5M内存)，热部署，及最自由的开源许可协议(所以第三方功能模块非常丰富)等特性。<br />
+<a href="http://nginx.org/">官网访问</a></p>
+
+<h2 id="基本命令">基本命令</h2>
+
+<h3 id="安装">安装</h3>
+
+<p>Windows下直接下载解压，linux下可以通过yum等安装工具安装。</p>
+
+<h3 id="命令">命令</h3>
+
+<ol>
+<li>启动<br />
+直接执行ngix可执行文件。在linux下可以通过<code>ps -aux|grep nginx</code>查询nginx进程，windows可以通过任务管理器查看。</li>
+<li>维护<br />
+nginx启动后，大部分的维护都可以通过<code>nginx -s singal</code>维护，参数有：
+
+<ul>
+<li>stop: 快速关闭</li>
+<li>quit: 平滑关闭</li>
+<li>reload: 修改配置文件后，重新加载配置文件生效。
+当修改配置文件后，可以用<code>nginx -t</code>检查配置文件是否符合规范。</li>
+</ul></li>
+</ol>
+
+<h2 id="配置文件介绍">配置文件介绍</h2>
+
+<p>Nginx设计由许多功能模块构成，这些功能模块都由配置文件控制。配置文件位于<code>%nginx_home%\conf\nginx.conf</code>，是一个普通的文本文件。配置文件由配置项和块配置项构成，注释以#开头。</p>
+
+<ul>
+<li>配置项值<br />
+<code>配置项名 配置项值 配置项值...;</code><br />
+配置项由配置值项名，配置项值构成，配置项名与值，配置项值与配置项值由空格分隔，最后以分号结束。配置项名必须是Nginx某个模块的配置，否则Nginx会认为非法配置。</li>
+<li>块配置项<br />
+块配置项与配置项类似，只是最后&rdquo;{}&ldquo;结束，括号中可以包含其它配置项，形成配置上下文，表示配置项同时生效。块配置项可以嵌套，同名配置项优先级，依赖于对应的Nginx模块。</li>
+</ul>
+
+<h3 id="基本配置">基本配置</h3>
+
+<ul>
+<li>worker_processes<br />
+<code>worker_processes 2;</code><br />
+Nginx使用一个Master进程来管理多个worker进程，一般情况下进程的数量与服务器CPU核数相等。用master进程管理，用worker进程处理连接请求，与Apache进程不同，Nginx一个进程可以同时处理多个连接请求，保证了高并发与稳健性。</li>
+<li>error_log/access_log<br />
+<code>error_log  logs/error.log  error;</code><br />
+<code>access_log  logs/host.access.log  main;</code><br />
+用于配置错误日志和访问日志，默认日志输出到logs目录中，错误日志输出级别有：debug,info,notice,warn,error,alert,emerg，从小到大。</li>
+<li>pid<br />
+<code>pid        logs/nginx.pid;</code><br />
+保存master进程id的文件存放位置，默认位于logs目录中。</li>
+<li>user<br />
+<code>user  nobody;</code>
+设置worker进程运行的用户及用户组。</li>
+<li>user<br />
+<code>use epoll;</code><br />
+设置事件模型，nginx自动选择，依赖于操作系统。windows不支持epoll，所以nginx在windows平台上大并发连接处理能力比较弱。<br /></li>
+</ul>
+
+<h2 id="web服务器配置">Web服务器配置</h2>
+
+<p>Web服务器主要功能由ngx_http_core_module实现。一个典型的Web服务器由http配置块定义，包含多个server配置块、location配置块、upstream配置块，所有的Web服务器配置必须位于这些块中。
+&gt;http {
+    upstream backend{
+        &hellip;
+    }
+    server {
+        listen 80;
+        server_name  localhost;
+        location /xxx{
+            &hellip;
+        }
+        location /xxx{
+            &hellip;.
+        }
+        &hellip;
+    }
+    server {
+        &hellip;
+    }
+&gt;}</p>
+
+<h3 id="虚拟主机">虚拟主机</h3>
+
+<p>每个server配置块定义一个虚拟主机，配置对应的主机域名和监听端口。</p>
+
+<ul>
+<li>监听端口<br />
+<code>listen address[:port]</code>
+<code>listen port</code><br />
+<code>listen unix:path</code><br />
+位于server配置块，默认<code>listen:*:80</code>。在地址、端口后还可以添加其它可选参数：
+
+<ul>
+<li>default_server 该主机将成为该地址的默认虚拟主机，如果没有配置那么该地址的第一个server将成为默认虚拟主机。当一个请求无法匹配主机域名时，选择默认虚拟主机处理。</li>
+</ul></li>
+<li>主机名称<br />
+<code>server_name name ...;</code><br />
+server_name后可以配置多个主机名称，第一个主机名成为主主机名，主机名可以支持通配符，正则表达式。当处理一个http请求时，Nginx根据head中的Host值与server中server_name匹配，决定哪个虚拟主机处理该请求，匹配优先级:
+
+<ol>
+<li>完全匹配</li>
+<li>通配符在前面的最长server_name</li>
+<li>通配符在后面的最长server_name</li>
+<li>第一个正则表式匹配的server_name<br />
+当都不匹配时，采用默认虚拟主机。server_name允许为空值，用于匹配Host无值的请求。</li>
+</ol></li>
+</ul>
+
+<h3 id="请求分发">请求分发</h3>
+
+<p><code>location [ = | ~ | ~* | ^~ ] uri { ... }</code><br />
+Nginx根据请求uri与location中配置的uri进行匹配，匹配上了就用location中的配置处理该请求。uri可以是前缀字符串或正则表达式。
+*   = 表示请求uri与location uri完全匹配，找到停止匹配过程
+*   ~ 表示匹配uri大小写敏感，用于location uri正则表达式
+*   ~* 表示匹配uri大小写不敏感，用于location uri正则表达式
+*   ^~ 表示只需location uri只需匹配请求uri请半部分，不进行正则表达式查询<br />
+匹配过程分为两个步聚：首先查找最长匹配的前缀字符串，然后查询第一个匹配的正则表达式。如果存在匹配的正则表达式，则使用该location，否则使用最长匹配的location处理请求。在匹配过程中，如果遇到完全匹配，则直接使用，终止查询；如果最长前缀uri使用^~修饰，则终止正则表达式查找。</p>
+
+<h3 id="资源设置">资源设置</h3>
+
+<ul>
+<li>root
+<code>root path;</code><br />
+设置请求资源的根目录，对请求文件来说，path+请求uri构成完整的物理文件路径。</li>
+<li>alias
+<code>alias path;</code><br />
+与root差异在于对请求uri的处理不同，alias构成实际路径时，丢弃请求uri中匹配部分，对请求文件来说，path+请求uri去除匹配location的uri构成完整的物理文件路径。</li>
+<li>index
+<code>index file ...;</code><br />
+默认值为<code>index index.html;</code>,用于定义首页，当请求uri以&rsquo;/&lsquo;时，返回首页。index后可以跟多个文件名，<code>ngx_http_index_module</code>模块依次尝试。如果文件存在，拼接uri后，再作内部重定向，重新进行uri分发。</li>
+<li>autoindex
+<code>autoindex on | off;</code><br />
+当请求以&rsquo;/&lsquo;结束时，如果<code>ngx_http_index_module</code>模块无法定位首页，则由<code>ngx_http_autoindex_module</code>模块处理，auoindex用于控制是否允许列出目录，默认禁止。</li>
+</ul>
+
+<h3 id="请求处理过程">请求处理过程</h3>
+
+<p>请求处理过程，由以上几步组成，首先根据请求IP与端口，确定侯选虚拟主机群，再根据规则确定虚拟主机，进行请求分发，处理请求。</p>
+
+<h2 id="反向代理服务器配置">反向代理服务器配置</h2>
+
+<p>代理服务器，通常指代理内部网络对外部网络请求，反向代理服务器是指接受外部请求，转向给内部服务器，并返回结果给外部网络。Nginx充当反向代理服务器是常见的功能，当接收到请求时，Nginx并不会立即转向给内部服务器，而是先完整接收请求到Nginx服务器，再转发给内部服务器。这样能屏憋外网差异，减少内部服务器负载。</p>
+
+<h3 id="反向代理">反向代理</h3>
+
+<ul>
+<li>proxy_pass
+<code>proxy_pass URL;</code><br />
+用于设置访问代理服务器的协议与访问地址（ip或域名都可以），url中可以添加location uri印射的uri。uri不存在时，直接把请求uri转发给代理服务器；当存在时，请求uri中匹配location部分，由代理URL中uri替换。</li>
+<li>proxy_next_upstream
+<code>proxy_next_upstream error | timeout | invalid_header | http_500 | http_502 | http_503 | http_504 | http_403 | http_404 | off ...;</code><br />
+配置哪些场景下，内部处理错误，换一台内部服务器处理该请求。</li>
+</ul>
+
+<h3 id="负载均衡">负载均衡</h3>
+
+<p>负载均衡是优化资源配置，减少时延，提高吞吐量和稳健性的技术手段。nginx支持三种负载均衡方式：</p>
+
+<blockquote>
+<ul>
+<li>round-robin：以轮叫调度的方式把请求转发给应用服务器，每个服务器处理的请求数相等，当某个应用服务器处理能力弱时，会超载。nginx默认使用方式。</li>
+<li>least-connected：最少连接方式，请求分配给活动连接数最少的应用服务器，考虑了服务器处理能力，当用应用处理来不急处理时，选择其它服务器处理。通过least_conn配置</li>
+<li>ip-hash：根据ip哈希决定服务器，把同一客户端的请求分配给同一应用服务器处理，有利于会话保持。通过ip_hash配置。</li>
+</ul>
+</blockquote>
+
+<p>在负载均衡处理时，可以对应用服务器分配权重，目前只有round-robin支持权重，nginx后续版本其它两种方式也会支持权重。</p>
+
+<ul>
+<li>upstream
+<code>upstream name { ... }</code><br />
+定义服务器集群，被<code>proxy_pass</code>引用。服务器可以监听不同端口，请求某一服务器不能建立连接时，请求传递给其它服务器。</li>
+<li>server
+<code>server address [parameters];</code><br />
+定义服务器地址和其它参数。地址可以是ip和域名，端口可选，默认80端口。参数最常用有： weight=number，定义权重，数字越大，权重越高；backup，用于标识备份服务器；down，用于标识服务器不可用，在ip-hash调度方式中，保证hash一致性。</li>
+</ul>
+
+<h3 id="rewrite">Rewrite</h3>
+
+<p>在反向代理过程中，常常需要改变请求uri，ngx_http_rewrite_module模块用于处理请求uri重写,返回重定向，及条件判断。模块指令包含：break,if,return,rewrite,set等。</p>
+
+<ul>
+<li>break
+<code>break;</code><br />
+终止rewrite模块指令执行。</li>
+<li>if
+<code>if (condition) { ... }</code><br />
+执行条件判断</li>
+<li>rewrite
+<code>rewrite regex replacement [flag];</code><br />
+重写请求uri。如果请求uri匹配正则表达式，则用replacement替换请求uri。flag标记支持：</li>
+</ul>
+
+<blockquote>
+<ul>
+<li>last: 终止处理当前rewrite模块指令，重写后的请求对其所在的server{&hellip;}重新发起请求。</li>
+<li>break: 终止处理当前rewrite模块指令。</li>
+<li>redirect: 重定向，浏览器地址改变，返回302状态码。</li>
+<li>permanent: 永久重定向，浏览器地址改变，返回301状态码。</li>
+</ul>
+</blockquote>
+
+<p>当替换uri以http或https开头时，终止处理，重定向。重写后的uri和原请求的查询参数转发给应用服务器，如果以&rdquo;?&ldquo;结束，将丢弃原请求查询参数。</p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  <div class='categories'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Categories: </span><a class='category' href='/categories/%E6%8A%80%E6%9C%AF'>技术</a></div>
+<div class='tags'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6'>中间件</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'>
+          <section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/JamesGore' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:JamesGore119@gmail.com' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Contact via Email</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section>
+
+          <div class='copyright'>
+  <p></p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><div class='sidebar-overlay'></div><script>window.__public_path__='\/assets\/js\/'</script>
+
+<script src='/assets/js/main.80cd10bb.js'></script>
+</body>
+
+</html>
+

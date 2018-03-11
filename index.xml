@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>首页 on 茅草屋</title>
+    <link>http://example.org/</link>
+    <description>Recent content in 首页 on 茅草屋</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 05 May 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Nginx 配置介绍</title>
+      <link>http://example.org/%E6%96%87%E7%AB%A0/2015/nginx-%E9%85%8D%E7%BD%AE%E4%BB%8B%E7%BB%8D/</link>
+      <pubDate>Tue, 05 May 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/%E6%96%87%E7%AB%A0/2015/nginx-%E9%85%8D%E7%BD%AE%E4%BB%8B%E7%BB%8D/</guid>
+      <description>Nginx 配置介绍 简介 Nginx是一个HTTP和反向代理服务器，一个邮件代理服务器，一个通用TCP代理服务器。第一个公开版本发行于2004年，俄国人发布，截止到2015年4月，市场占有率为21.43%，已成为排名第二的服务器(Apache排名第一)，成为了高性能服务器的代名词。 Nginx是在互联网产业规模发展起来后，针对高并发设计的服务器，具有高性能，高扩展性，高并发性(单机支持10万以上并发连接)，高可靠性，低内存消耗(10000个非活动keep-alive连接仅消耗2.5M内存)，热部署，及最自由的开源许可协议(所以第三方功能模块非常丰富)等特性。
+官网访问
+基本命令 安装 Windows下直接下载解压，linux下可以通过yum等安装工具安装。
+命令  启动
+直接执行ngix可执行文件。在linux下可以通过ps -aux|grep nginx查询nginx进程，windows可以通过任务管理器查看。 维护
+nginx启动后，大部分的维护都可以通过nginx -s singal维护，参数有：  stop: 快速关闭 quit: 平滑关闭 reload: 修改配置文件后，重新加载配置文件生效。 当修改配置文件后，可以用nginx -t检查配置文件是否符合规范。   配置文件介绍 Nginx设计由许多功能模块构成，这些功能模块都由配置文件控制。配置文件位于%nginx_home%\conf\nginx.conf，是一个普通的文本文件。配置文件由配置项和块配置项构成，注释以#开头。
+ 配置项值
+配置项名 配置项值 配置项值...;
+配置项由配置值项名，配置项值构成，配置项名与值，配置项值与配置项值由空格分隔，最后以分号结束。配置项名必须是Nginx某个模块的配置，否则Nginx会认为非法配置。 块配置项
+块配置项与配置项类似，只是最后&amp;rdquo;{}&amp;ldquo;结束，括号中可以包含其它配置项，形成配置上下文，表示配置项同时生效。块配置项可以嵌套，同名配置项优先级，依赖于对应的Nginx模块。  基本配置  worker_processes
+worker_processes 2;
+Nginx使用一个Master进程来管理多个worker进程，一般情况下进程的数量与服务器CPU核数相等。用master进程管理，用worker进程处理连接请求，与Apache进程不同，Nginx一个进程可以同时处理多个连接请求，保证了高并发与稳健性。 error_log/access_log
+error_log logs/error.log error;
+access_log logs/host.access.log main;
+用于配置错误日志和访问日志，默认日志输出到logs目录中，错误日志输出级别有：debug,info,notice,warn,error,alert,emerg，从小到大。 pid
+pid logs/nginx.pid;
+保存master进程id的文件存放位置，默认位于logs目录中。 user
+user nobody; 设置worker进程运行的用户及用户组。 user
+use epoll;
+设置事件模型，nginx自动选择，依赖于操作系统。windows不支持epoll，所以nginx在windows平台上大并发连接处理能力比较弱。
+  Web服务器配置 Web服务器主要功能由ngx_http_core_module实现。一个典型的Web服务器由http配置块定义，包含多个server配置块、location配置块、upstream配置块，所有的Web服务器配置必须位于这些块中。 &amp;gt;http { upstream backend{ &amp;hellip; } server { listen 80; server_name localhost; location /xxx{ &amp;hellip; } location /xxx{ &amp;hellip;.</description>
+    </item>
+    
+  </channel>
+</rss>
