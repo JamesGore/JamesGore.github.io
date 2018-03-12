@@ -2,21 +2,36 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>文章 on 茅草屋</title>
-    <link>http://example.org/%E6%96%87%E7%AB%A0/</link>
+    <link>https://jamesgore.github.io/%E6%96%87%E7%AB%A0/</link>
     <description>Recent content in 文章 on 茅草屋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 05 May 2015 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 12 Mar 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://example.org/%E6%96%87%E7%AB%A0/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jamesgore.github.io/%E6%96%87%E7%AB%A0/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Hugo简易使用指南</title>
+      <link>https://jamesgore.github.io/%E6%96%87%E7%AB%A0/2018/hugo%E7%AE%80%E6%98%93%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jamesgore.github.io/%E6%96%87%E7%AB%A0/2018/hugo%E7%AE%80%E6%98%93%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</guid>
+      <description>Hugo基于go语言的开源静态站点生成器，相比Jekyll更易用。Hugo提供内署服务器，内容可以运行在本地，也可以可以部署到GitHub,GitLab等上。支持MarkDown，可用于Blog、文档、公司站点写作。
+安装与部署 安装部署相当简单，直接参照官网：
+ 安装
+ 部署  配置 站点配置 站点配置包含两部分：基本配置与主题配置。 打开站点根目录下文件config.toml，基本配置如下：
+baseURL = &amp;#34;https://example.org/&amp;#34; # 部署到已有域名使用，本地不用 languageCode = &amp;#34;en-us&amp;#34; title = &amp;#34;My New Hugo Site&amp;#34; # 站点标题 theme = &amp;#34;ananke&amp;#34; # 站点使用主题，或可以通过命令运行时，每次指定 主题配置，需参照各主题说明文档。
+文章配置 通过Front Matter，配置每篇文章的元数据,放置文章MarkDown开头，配置样例如下：
+--- title: &amp;#34;spf13-vim 3.0 release and new website&amp;#34; description: &amp;#34;spf13-vim is a cross platform distribution of vim plugins and resources for Vim.&amp;#34; tags: [ &amp;#34;.vimrc&amp;#34;, &amp;#34;plugins&amp;#34;, &amp;#34;spf13-vim&amp;#34;, &amp;#34;vim&amp;#34; ] lastmod: 2015-12-23 date: &amp;#34;2012-04-06&amp;#34; categories: - &amp;#34;Development&amp;#34; - &amp;#34;VIM&amp;#34; slug: &amp;#34;spf13-vim-3-0-release-and-new-website&amp;#34; ---  date: 文章创建时间 description: 内容描述 draft: true|false, true时，正常不会展示，除非增加 -D选项 expiryDate: Date, 文章过期时间，超过将不展示，除非增加-E选项 lastmod：Date，最后修改时间 publishDate: Date, 发布时间，如果时间未到，将不会发布，除非增加-F选项 title：标题 categories，tags，内置分类与标签 slug：定制url，否则用标题与目录结构作为url weight: 控制在列表中显示顺序  常用命令 常用命令如下，其它可以通过帮助查看：</description>
+    </item>
+    
+    <item>
       <title>Nginx 配置介绍</title>
-      <link>http://example.org/%E6%96%87%E7%AB%A0/2015/nginx-%E9%85%8D%E7%BD%AE%E4%BB%8B%E7%BB%8D/</link>
+      <link>https://jamesgore.github.io/%E6%96%87%E7%AB%A0/2015/nginx-%E9%85%8D%E7%BD%AE%E4%BB%8B%E7%BB%8D/</link>
       <pubDate>Tue, 05 May 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://example.org/%E6%96%87%E7%AB%A0/2015/nginx-%E9%85%8D%E7%BD%AE%E4%BB%8B%E7%BB%8D/</guid>
+      <guid>https://jamesgore.github.io/%E6%96%87%E7%AB%A0/2015/nginx-%E9%85%8D%E7%BD%AE%E4%BB%8B%E7%BB%8D/</guid>
       <description>Nginx 配置介绍 简介 Nginx是一个HTTP和反向代理服务器，一个邮件代理服务器，一个通用TCP代理服务器。第一个公开版本发行于2004年，俄国人发布，截止到2015年4月，市场占有率为21.43%，已成为排名第二的服务器(Apache排名第一)，成为了高性能服务器的代名词。 Nginx是在互联网产业规模发展起来后，针对高并发设计的服务器，具有高性能，高扩展性，高并发性(单机支持10万以上并发连接)，高可靠性，低内存消耗(10000个非活动keep-alive连接仅消耗2.5M内存)，热部署，及最自由的开源许可协议(所以第三方功能模块非常丰富)等特性。
 官网访问
 基本命令 安装 Windows下直接下载解压，linux下可以通过yum等安装工具安装。

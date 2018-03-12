@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>中间件 on 茅草屋</title>
-    <link>http://example.org/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/</link>
+    <link>https://jamesgore.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/</link>
     <description>Recent content in 中间件 on 茅草屋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 05 May 2015 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://example.org/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jamesgore.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Nginx 配置介绍</title>
-      <link>http://example.org/%E6%96%87%E7%AB%A0/2015/nginx-%E9%85%8D%E7%BD%AE%E4%BB%8B%E7%BB%8D/</link>
+      <link>https://jamesgore.github.io/%E6%96%87%E7%AB%A0/2015/nginx-%E9%85%8D%E7%BD%AE%E4%BB%8B%E7%BB%8D/</link>
       <pubDate>Tue, 05 May 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://example.org/%E6%96%87%E7%AB%A0/2015/nginx-%E9%85%8D%E7%BD%AE%E4%BB%8B%E7%BB%8D/</guid>
+      <guid>https://jamesgore.github.io/%E6%96%87%E7%AB%A0/2015/nginx-%E9%85%8D%E7%BD%AE%E4%BB%8B%E7%BB%8D/</guid>
       <description>Nginx 配置介绍 简介 Nginx是一个HTTP和反向代理服务器，一个邮件代理服务器，一个通用TCP代理服务器。第一个公开版本发行于2004年，俄国人发布，截止到2015年4月，市场占有率为21.43%，已成为排名第二的服务器(Apache排名第一)，成为了高性能服务器的代名词。 Nginx是在互联网产业规模发展起来后，针对高并发设计的服务器，具有高性能，高扩展性，高并发性(单机支持10万以上并发连接)，高可靠性，低内存消耗(10000个非活动keep-alive连接仅消耗2.5M内存)，热部署，及最自由的开源许可协议(所以第三方功能模块非常丰富)等特性。
 官网访问
 基本命令 安装 Windows下直接下载解压，linux下可以通过yum等安装工具安装。

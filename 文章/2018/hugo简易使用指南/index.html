@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Hugo基于go语言的开源静态站点生成器，相比Jekyll更易用。Hugo提供内署服务器，内容可以运行在本地，也可以可以部署到GitHub,GitLab等上。支持MarkDown，可用于Blog、文档、公司站点写作。
+安装与部署 安装部署相当简单，直接参照官网：
+ 安装
+ 部署  配置 站点配置 站点配置包含两部分：基本配置与主题配置。 打开站点根目录下文件config.toml，基本配置如下：
+baseURL = &#34;https://example.org/&#34; # 部署到已有域名使用，本地不用 languageCode = &#34;en-us&#34; title = &#34;My New Hugo Site&#34; # 站点标题 theme = &#34;ananke&#34; # 站点使用主题，或可以通过命令运行时，每次指定 主题配置，需参照各主题说明文档。
+文章配置 通过Front Matter，配置每篇文章的元数据,放置文章MarkDown开头，配置样例如下：
+--- title: &#34;spf13-vim 3.0 release and new website&#34; description: &#34;spf13-vim is a cross platform distribution of vim plugins and resources for Vim.&#34; tags: [ &#34;.vimrc&#34;, &#34;plugins&#34;, &#34;spf13-vim&#34;, &#34;vim&#34; ] lastmod: 2015-12-23 date: &#34;2012-04-06&#34; categories: - &#34;Development&#34; - &#34;VIM&#34; slug: &#34;spf13-vim-3-0-release-and-new-website&#34; ---  date: 文章创建时间 description: 内容描述 draft: true|false, true时，正常不会展示，除非增加 -D选项 expiryDate: Date, 文章过期时间，超过将不展示，除非增加-E选项 lastmod：Date，最后修改时间 publishDate: Date, 发布时间，如果时间未到，将不会发布，除非增加-F选项 title：标题 categories，tags，内置分类与标签 slug：定制url，否则用标题与目录结构作为url weight: 控制在列表中显示顺序  常用命令 常用命令如下，其它可以通过帮助查看：'>
+
+<meta property='og:title' content='Hugo简易使用指南 • 茅草屋'>
+<meta property='og:description' content='Hugo基于go语言的开源静态站点生成器，相比Jekyll更易用。Hugo提供内署服务器，内容可以运行在本地，也可以可以部署到GitHub,GitLab等上。支持MarkDown，可用于Blog、文档、公司站点写作。
+安装与部署 安装部署相当简单，直接参照官网：
+ 安装
+ 部署  配置 站点配置 站点配置包含两部分：基本配置与主题配置。 打开站点根目录下文件config.toml，基本配置如下：
+baseURL = &#34;https://example.org/&#34; # 部署到已有域名使用，本地不用 languageCode = &#34;en-us&#34; title = &#34;My New Hugo Site&#34; # 站点标题 theme = &#34;ananke&#34; # 站点使用主题，或可以通过命令运行时，每次指定 主题配置，需参照各主题说明文档。
+文章配置 通过Front Matter，配置每篇文章的元数据,放置文章MarkDown开头，配置样例如下：
+--- title: &#34;spf13-vim 3.0 release and new website&#34; description: &#34;spf13-vim is a cross platform distribution of vim plugins and resources for Vim.&#34; tags: [ &#34;.vimrc&#34;, &#34;plugins&#34;, &#34;spf13-vim&#34;, &#34;vim&#34; ] lastmod: 2015-12-23 date: &#34;2012-04-06&#34; categories: - &#34;Development&#34; - &#34;VIM&#34; slug: &#34;spf13-vim-3-0-release-and-new-website&#34; ---  date: 文章创建时间 description: 内容描述 draft: true|false, true时，正常不会展示，除非增加 -D选项 expiryDate: Date, 文章过期时间，超过将不展示，除非增加-E选项 lastmod：Date，最后修改时间 publishDate: Date, 发布时间，如果时间未到，将不会发布，除非增加-F选项 title：标题 categories，tags，内置分类与标签 slug：定制url，否则用标题与目录结构作为url weight: 控制在列表中显示顺序  常用命令 常用命令如下，其它可以通过帮助查看：'>
+<meta property='og:url' content='https://jamesgore.github.io/%E6%96%87%E7%AB%A0/2018/hugo%E7%AE%80%E6%98%93%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/'>
+<meta property='og:site_name' content='茅草屋'>
+<meta property='og:type' content='article'><meta property='article:section' content='文章'><meta property='article:tag' content='指南'><meta property='article:published_time' content='2018-03-12T00:00:00Z'/><meta property='article:modified_time' content='2018-03-12T00:00:00Z'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.37.1" />
+
+  <title>Hugo简易使用指南 • 茅草屋</title>
+  <link rel='canonical' href='https://jamesgore.github.io/%E6%96%87%E7%AB%A0/2018/hugo%E7%AE%80%E6%98%93%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.8d5211f9.css'>
+</head>
+
+
+<body class='page type-文章 has-sidebar sidebar-sticky'>
+
+  <div class='site'>
+
+    <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+<div id='sidebar' class='sidebar'>
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+    茅草屋
+    </h2>
+    <div class='desc'>
+    0x2B|~0x2B
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'>Tags</h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6' style='font-size:1em'>中间件</a>
+      </li><li>
+        <a href='/tags/%E6%8C%87%E5%8D%97' style='font-size:1em'>指南</a>
+      </li></ul>
+</div>
+
+
+</section>
+</div>
+</div>
+
+    <div class='main'>
+
+      <nav id='main-menu' class='main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='hamburger hamburger--arrow sidebar-toggler' type='button' aria-controls='sidebar' aria-expanded='false'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+    <ul><li class='item'>
+        <a href='/'>首页</a>
+      </li><li class='item'>
+        <a href='/%E6%96%87%E7%AB%A0/'>文章</a>
+      </li></ul>
+  </div>
+</nav>
+
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>茅草屋</p><p class='desc site-desc'>0x2B|~0x2B</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Hugo简易使用指南</h1>
+      
+
+    </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2018-03-12T00:00:00Z'>2018, Mar 12</time>
+</span>
+
+  
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<p><a href="https://gohugo.io/">Hugo</a>基于go语言的开源静态站点生成器，相比Jekyll更易用。Hugo提供内署服务器，内容可以运行在本地，也可以可以部署到GitHub,GitLab等上。支持MarkDown，可用于Blog、文档、公司站点写作。</p>
+
+<h2 id="安装与部署">安装与部署</h2>
+
+<p>安装部署相当简单，直接参照官网：</p>
+
+<ul>
+<li><a href="https://gohugo.io/getting-started/installing/">安装</a><br /></li>
+<li><a href="https://gohugo.io/hosting-and-deployment/">部署</a></li>
+</ul>
+
+<h2 id="配置">配置</h2>
+
+<h3 id="站点配置">站点配置</h3>
+
+<p>站点配置包含两部分：基本配置与主题配置。 打开站点根目录下文件<code>config.toml</code>，基本配置如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml">    <span style="color:#a6e22e">baseURL</span> = <span style="color:#e6db74">&#34;https://example.org/&#34;</span>  <span style="color:#75715e"># 部署到已有域名使用，本地不用</span>
+    <span style="color:#a6e22e">languageCode</span> = <span style="color:#e6db74">&#34;en-us&#34;</span>
+    <span style="color:#a6e22e">title</span> = <span style="color:#e6db74">&#34;My New Hugo Site&#34;</span>  <span style="color:#75715e"># 站点标题</span>
+    <span style="color:#a6e22e">theme</span> = <span style="color:#e6db74">&#34;ananke&#34;</span> <span style="color:#75715e"># 站点使用主题，或可以通过命令运行时，每次指定</span></code></pre></div>
+<p>主题配置，需参照各主题说明文档。</p>
+
+<h3 id="文章配置">文章配置</h3>
+
+<p>通过<code>Front Matter</code>，配置每篇文章的元数据,放置文章MarkDown开头，配置样例如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+title: <span style="color:#e6db74">&#34;spf13-vim 3.0 release and new website&#34;</span>
+description: <span style="color:#e6db74">&#34;spf13-vim is a cross platform distribution of vim plugins and resources for Vim.&#34;</span>
+tags: [ <span style="color:#e6db74">&#34;.vimrc&#34;</span>, <span style="color:#e6db74">&#34;plugins&#34;</span>, <span style="color:#e6db74">&#34;spf13-vim&#34;</span>, <span style="color:#e6db74">&#34;vim&#34;</span> ]
+lastmod: <span style="color:#e6db74">2015-12-23</span>
+date: <span style="color:#e6db74">&#34;2012-04-06&#34;</span>
+categories:
+  - <span style="color:#e6db74">&#34;Development&#34;</span>
+  - <span style="color:#e6db74">&#34;VIM&#34;</span>
+slug: <span style="color:#e6db74">&#34;spf13-vim-3-0-release-and-new-website&#34;</span>
+---</code></pre></div>
+<ul>
+<li>date: 文章创建时间</li>
+<li>description: 内容描述</li>
+<li>draft: true|false, true时，正常不会展示，除非增加 <code>-D</code>选项</li>
+<li>expiryDate: Date, 文章过期时间，超过将不展示，除非增加<code>-E</code>选项</li>
+<li>lastmod：Date，最后修改时间</li>
+<li>publishDate: Date, 发布时间，如果时间未到，将不会发布，除非增加<code>-F</code>选项</li>
+<li>title：标题</li>
+<li>categories，tags，内置分类与标签</li>
+<li>slug：定制url，否则用标题与目录结构作为url</li>
+<li>weight: 控制在列表中显示顺序</li>
+</ul>
+
+<h2 id="常用命令">常用命令</h2>
+
+<p>常用命令如下，其它可以通过帮助查看：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"> hugo --help</code></pre></div>
+<ul>
+<li>生成站点：</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"> hugo new site <span style="color:#e6db74">&#34;对应站点目录&#34;</span></code></pre></div>
+<ul>
+<li>添加主题：直接下载主题到站点<code>themes</code>目录</li>
+<li>生成内容：内容生成到站点<code>public</code>目录</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"> hugo [Flags]</code></pre></div>
+<p>常用Flags选项：</p>
+
+<blockquote>
+<p>-D 包含草稿<br />
+-F 包含未来发布内容<br />
+-E 包含已过期内容</p>
+</blockquote>
+
+<ul>
+<li>启动本地服务：</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd"> hugo server [Flags]</code></pre></div>
+<p>Flags与生成内容一样</p>
+
+<h2 id="其它">其它</h2>
+
+<p>站点文章默认按目录结构组织，每个目录可以设置自己的目录页<code>_index.md</code>,Hugo展示目录页内容与目录中文章相关内容。<code>content</code>目录下<code>_index.md</code>为首页。样例如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+title: 首页
+menu: main
+weight: -<span style="color:#ae81ff">270</span>
+---
+<span style="color:#e6db74">&gt; 生活并不要求我们成为最好的，只求我们全力以赴。</span></code></pre></div>
+<p>对新手，最简单使用方式，了解基本概念后，然后找个<a href="https://themes.gohugo.io/">主题</a>示例，调整配置观察变化。</p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  <div class='categories'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Categories: </span><a class='category' href='/categories/%E6%8A%80%E6%9C%AF'>技术</a></div>
+<div class='tags'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/%E6%8C%87%E5%8D%97'>指南</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/%E6%96%87%E7%AB%A0/2015/nginx-%E9%85%8D%E7%BD%AE%E4%BB%8B%E7%BB%8D/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>Nginx 配置介绍</a>
+    </div></div>
+</nav>
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'>
+          <section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/JamesGore' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:JamesGore119@gmail.com' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Contact via Email</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section>
+
+          <div class='copyright'>
+  <p></p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><div class='sidebar-overlay'></div><script>window.__public_path__='\/assets\/js\/'</script>
+
+<script src='/assets/js/main.80cd10bb.js'></script>
+</body>
+
+</html>
+
